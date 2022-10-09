@@ -1,0 +1,55 @@
+,industry 1,industry 2,industry 3
+0,manufacturing,"food, beverages and tobacco","food, beverages and tobacco"
+1,construction,textile and wearing apparel,textile and wearing apparel
+2,services,paper products and publishing,paper products and publishing
+3,others,"petroleum, chemical, rubber and plastic products","petroleum, chemical, rubber and plastic products"
+4,,fabricated metal products,fabricated metal products
+5,,machinery and equipment,machinery and equipment
+6,,electrical products,electrical products
+7,,electronic products,electronic products
+8,,medical and precision instruments,medical and precision instruments
+9,,transport equipment,transport equipment
+10,,other manufacturing industries,other manufacturing industries
+11,,construction,construction
+12,,wholesale and retail trade,wholesale trade
+13,,"transport, storage and communications",retail trade
+14,,financial services,"transport, storage and communications"
+15,,business and real estate services,financial institutions
+16,,"community, social and personal services",insurance
+17,,others,business and real estate services
+18,,transport and storage,public administration and education
+19,,hotels and restaurants,health and social work
+20,,information and communications,"other community, social and personal services"
+21,,real estate and leasing services,others
+22,,professional services,paper products and printing
+23,,paper / rubber / plastic products and printing,"petroleum, chemical and pharmaceutical products"
+24,,"petroleum, chemical and pharmaceutical products",rubber and plastic products
+25,,"fabricated metal products, machinery and equipment",land transport and supporting services
+26,,"electronic, computer and optical products",water transport and supporting services
+27,,transportation and storage,air transport and supporting services
+28,,accommodation and food services,other transport and storage services
+29,,financial and insurance services,hotels
+30,,real estate services,restaurants
+31,,administrative and support services,broadcasting and publishing
+32,,,telecommunications
+33,,,it and other information services
+34,,,real estate and leasing services
+35,,,"legal, accounting and management services"
+36,,,architectural and engineering services
+37,,,other professional services
+38,,,education and public administration
+39,,,health and social services
+40,,,paper / rubber / plastic products and printing
+41,,,"fabricated metal products, machinery and equipment"
+42,,,"electronic, computer and optical products"
+43,,,other transportation and storage services
+44,,,accommodation
+45,,,food and beverage services
+46,,,"telecommunications, broadcasting and publishing"
+47,,,financial services
+48,,,insurance services
+49,,,real estate services
+50,,,security and investigation
+51,,,cleaning and landscaping
+52,,,other administrative and support services
+53,,,"arts, entertainment and recreation"
