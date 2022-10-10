@@ -61,12 +61,15 @@ if explore == "Employment Data":
     elif data == 'Labour Force Status By Age Group':
         st.dataframe(original[columns_select], use_container_width=True)
 
-    st.download_button(
-        label="Download Customised Columns Data",
-        data=original[columns_select].to_csv(), file_name=data + "_custom.csv")
-
-    st.download_button(label="Download Raw Data",
-                       data=original.to_csv(), file_name=data + ".csv")
+    option = st.selectbox("Raw or Custom",
+                          ("Raw", "Custom"))
+    if option == "Custom":
+        st.download_button(
+            label="Download Customised Columns Data",
+            data=original[columns_select].to_csv(), file_name=data + "_custom.csv")
+    else:
+        st.download_button(label="Download Raw Data",
+                           data=original.to_csv(), file_name=data + ".csv")
 
 
 elif explore == "Quick Look":
@@ -78,12 +81,6 @@ elif explore == "Columns":
     st.write(original.columns.to_list())
 
 
-
-# df = original.replace("-", 0)
-# df.Year = df.year.astype(int)
-# df.Industry = df.Industry.astype(str)
-# df.Change = df.Change.astype(float)
-
 if st.sidebar.checkbox('Graph'):
     if data == "Employment Change":
         st.subheader(data + " Sunburst From 2017 To 2021")
@@ -92,7 +89,6 @@ if st.sidebar.checkbox('Graph'):
         fig = px.sunburst(df, path=['year', "res_stat",'industry1',"employment_change"],
                           color="employment_change",color_continuous_scale='RdBu')
         st.plotly_chart(fig)
-
 
     elif data == "Employment By Gender and Education":
         st.subheader(data + ' Barplot From 2017 To 2021')
