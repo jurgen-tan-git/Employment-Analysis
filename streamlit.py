@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import streamlit as st
+st.set_page_config(layout="wide")
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -10,8 +11,8 @@ matplotlib.use('Agg')
 
 # Reading and renaming of files for visualization
 original = pd.read_csv("Datasets/mrsd_4_annl_emp_chg_by_ind_14032022.csv")
-original = original.drop(["industry1", "industry3"], axis=1).rename(
-    columns={"year": "Year", "industry2": "Industry", "employment_change": "Change"})
+# original = original.drop(["industry1", "industry3"], axis=1).rename(
+#     columns={"year": "Year", "industry2": "Industry", "employment_change": "Change"})
 
 # Title and Sidebar information
 st.title('Employment Change Dataset')
@@ -24,17 +25,23 @@ start_year, end_year = st.select_slider(
     options=list(range(1991, 2022)),
     value=(1991, 2021))
 st.write('You selected the year range of', start_year, 'and', end_year)
-original = original[(original.Year >= start_year) & (original.Year <= end_year)]
+original = original[(original.year >= start_year) & (original.year <= end_year)]
 
 # Selecting Of Columns For Display
-columns = st.multiselect("Select The Columns To View", ["Year", "Industry", "Change"],
-                         default=["Year", "Industry", "Change"])
+columns = original.columns.values
+columns_select = st.multiselect("Select The Columns To View", columns,
+                         default=columns)
+genre = st.sidebar.radio("Which Dataset To View",
+    ('Employment Change', 'Employment By Gender and Education', 'Labour Force Status By Age Group'))
+
+if genre == 'Employment Change':
+        st.dataframe(original[columns_select], use_container_width=True)
 
 explore = st.sidebar.radio("Data Filters", ("Employment Data", "Quick Look", "Show Columns", "Statistics"))
 
 if explore == "Employment Data":
     st.subheader("Employment Data")
-    st.dataframe(original[columns], use_container_width=True)
+
 
 if explore == "Quick Look":
     st.subheader('Dataset Quick Look:')
