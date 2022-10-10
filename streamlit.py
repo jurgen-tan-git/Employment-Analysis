@@ -1,7 +1,5 @@
 import matplotlib
-import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 import streamlit as st
 
 st.set_page_config(layout="wide")
@@ -81,25 +79,25 @@ elif explore == "Columns":
     st.write(original.columns.to_list())
 
 
-if st.sidebar.checkbox('Graph'):
-    if data == "Employment Change":
-        st.subheader(data + " Sunburst From 2017 To 2021")
-        df = df[df.year >= 2017]
-        df["employment_change"] = df["employment_change"].astype(float)
-        fig = px.sunburst(df, path=['year', "res_stat",'industry1',"employment_change"],
-                          color="employment_change",color_continuous_scale='RdBu')
-        st.plotly_chart(fig)
+# if st.sidebar.checkbox('Graph'):
+if data == "Employment Change":
+    st.subheader(data + " Sunburst From 2017 To 2021")
+    df = df[df.year >= 2017]
+    df["employment_change"] = df["employment_change"].astype(float)
+    fig = px.sunburst(df, path=['year', "res_stat",'industry1',"employment_change"],
+                      color="employment_change",color_continuous_scale='RdBu')
+    st.plotly_chart(fig)
 
-    elif data == "Employment By Gender and Education":
-        st.subheader(data + ' Barplot From 2017 To 2021')
-    # st.info("Please set a year range less than 5 years")
-    # columnX = st.sidebar.selectbox("X (Choose a column). Try Selecting Year:", df.columns)
-    # columnY = st.sidebar.selectbox("Y (Choose a column). Try Selecting Change", df.columns)
-    # hueopt = st.sidebar.selectbox("Hue (Choose a column). Try Selecting Industry", df.columns)
-    #     fig = plt.figure(figsize=(15, 8))
-    # sns.barplot(data=df, x="Year", y="Change", hue="Industry")
-    #     sns.barplot(x=columnX, y=columnY, hue=hueopt, data=df, palette="Paired")
-    #     st.pyplot(fig)
+elif data == "Employment By Gender and Education":
+    st.subheader(data + ' Barplot From 2017 To 2021')
+# st.info("Please set a year range less than 5 years")
+# columnX = st.sidebar.selectbox("X (Choose a column). Try Selecting Year:", df.columns)
+# columnY = st.sidebar.selectbox("Y (Choose a column). Try Selecting Change", df.columns)
+# hueopt = st.sidebar.selectbox("Hue (Choose a column). Try Selecting Industry", df.columns)
+#     fig = plt.figure(figsize=(15, 8))
+# sns.barplot(data=df, x="Year", y="Change", hue="Industry")
+#     sns.barplot(x=columnX, y=columnY, hue=hueopt, data=df, palette="Paired")
+#     st.pyplot(fig)
 
 # Employment By Age and Education
 # df_age_edu = pd.read_csv("Datasets/employed_15_sex_edu_age_yr.csv").rename(columns={"year": "Year",
@@ -108,47 +106,47 @@ if st.sidebar.checkbox('Graph'):
 #                                                                                     "edu_1": "Education",
 #                                                                                     "employed": "Employed"
 #                                                                                     }).replace("-", 0)
-        df.employed = pd.to_numeric(df.employed)
-        df = df[(df.year >= 2017)& (df.age != "15-19")]
-        df = df.groupby(["year", "edu_1"]).sum()
-        df = df.reset_index()
+    df.employed = pd.to_numeric(df.employed)
+    df = df[(df.year >= 2017)& (df.age != "15-19")]
+    df = df.groupby(["year", "edu_1"]).sum()
+    df = df.reset_index()
 
-        f1 = df[df['year'] == 2017]
-        f2 = df[df['year'] == 2018]
-        f3 = df[df['year'] == 2019]
-        f4 = df[df['year'] == 2020]
-        f5 = df[df['year'] == 2021]
+    f1 = df[df['year'] == 2017]
+    f2 = df[df['year'] == 2018]
+    f3 = df[df['year'] == 2019]
+    f4 = df[df['year'] == 2020]
+    f5 = df[df['year'] == 2021]
 
-        edu = df['edu_1'].unique().tolist()
+    edu = df['edu_1'].unique().tolist()
 
-        fig = go.Figure()
-        colors = px.colors.qualitative.T10[0:5]
+    fig = go.Figure()
+    colors = px.colors.qualitative.T10[0:5]
 
-        fig.add_trace(go.Bar(x=edu, y=f1['employed'], name="2017", marker_color=colors[0]))
-        fig.add_trace(go.Bar(x=edu, y=f2['employed'], name="2018", marker_color=colors[1]))
-        fig.add_trace(go.Bar(x=edu, y=f3['employed'], name="2019", marker_color=colors[2]))
-        fig.add_trace(go.Bar(x=edu, y=f4['employed'], name="2020", marker_color=colors[3]))
-        fig.add_trace(go.Bar(x=edu, y=f5['employed'], name="2021", marker_color=colors[4]))
-        st.plotly_chart(fig, use_container_width=True)
+    fig.add_trace(go.Bar(x=edu, y=f1['employed'], name="2017", marker_color=colors[0]))
+    fig.add_trace(go.Bar(x=edu, y=f2['employed'], name="2018", marker_color=colors[1]))
+    fig.add_trace(go.Bar(x=edu, y=f3['employed'], name="2019", marker_color=colors[2]))
+    fig.add_trace(go.Bar(x=edu, y=f4['employed'], name="2020", marker_color=colors[3]))
+    fig.add_trace(go.Bar(x=edu, y=f5['employed'], name="2021", marker_color=colors[4]))
+    st.plotly_chart(fig, use_container_width=True)
 
-    elif data == "Labour Force Status By Age Group":
-        st.subheader(data + " Piechart From 2017 To 2021")
+elif data == "Labour Force Status By Age Group":
+    st.subheader(data + " Piechart From 2017 To 2021")
 
-        labels = ["20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "60-64"]
+    labels = ["20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "60-64"]
 
-        # Create subplots: use 'domain' type for Pie subplot
-        fig = make_subplots(rows=1, cols=2, specs=[[{'type':'domain'}, {'type':'domain'}]])
-        fig.add_trace(go.Pie(labels=labels, values=df["employed"][df.year == 2019], name="2019"),
-                      1, 1)
-        fig.add_trace(go.Pie(labels=labels, values=df["employed"][df.year == 2020], name="2020"),
-                      1, 2)
+    # Create subplots: use 'domain' type for Pie subplot
+    fig = make_subplots(rows=1, cols=2, specs=[[{'type':'domain'}, {'type':'domain'}]])
+    fig.add_trace(go.Pie(labels=labels, values=df["employed"][df.year == 2019], name="2019"),
+                  1, 1)
+    fig.add_trace(go.Pie(labels=labels, values=df["employed"][df.year == 2020], name="2020"),
+                  1, 2)
 
-        # Use `hole` to create a donut-like pie chart
-        fig.update_traces(hole=.4, hoverinfo="label+percent+name")
+    # Use `hole` to create a donut-like pie chart
+    fig.update_traces(hole=.4, hoverinfo="label+percent+name")
 
-        fig.update_layout(
-            title_text="Age Group Of Employed People In The Labour Force",
-            # Add annotations in the center of the donut pies.
-            annotations=[dict(text='2019', x=0.175, y=0.5, font_size=20, showarrow=False),
-                         dict(text='2020', x=0.825, y=0.5, font_size=20, showarrow=False)])
-        st.plotly_chart(fig)
+    fig.update_layout(
+        title_text="Age Group Of Employed People In The Labour Force",
+        # Add annotations in the center of the donut pies.
+        annotations=[dict(text='2019', x=0.175, y=0.5, font_size=20, showarrow=False),
+                     dict(text='2020', x=0.825, y=0.5, font_size=20, showarrow=False)])
+    st.plotly_chart(fig)
