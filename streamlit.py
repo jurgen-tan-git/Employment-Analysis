@@ -1,3 +1,5 @@
+# If streamlit not present
+# pip install streamlit
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
@@ -9,7 +11,7 @@ matplotlib.use('Agg')
 import streamlit as st
 st.set_page_config(layout="wide")
 
-# Title and Sidebar information
+# Title and Sidebar informationS
 st.title('Employment Change Dataset')
 st.sidebar.subheader(' Filter ')
 data = st.radio("Which Dataset To View",
