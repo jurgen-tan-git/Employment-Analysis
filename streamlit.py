@@ -44,8 +44,8 @@ if explore == "Employment Data":
     columns_select = st.multiselect("Select The Columns To View",
                                     columns, default=columns)
     # Year slidebar to choose year range
-    start = int(min(original.year))
-    end = int(max(original.year))
+    start = 2017
+    end = 2021
     start_year, end_year = st.select_slider('Select the years to view',
                                             options=list(range(start, end + 1)), value=(start, end))
     st.write('You selected the year range of', start_year, 'and', end_year)
@@ -88,22 +88,6 @@ if data == "Employment Change":
 
 elif data == "Employment By Gender and Education":
     st.subheader(data + ' Barplot From 2017 To 2021')
-    # st.info("Please set a year range less than 5 years")
-    # columnX = st.sidebar.selectbox("X (Choose a column). Try Selecting Year:", df.columns)
-    # columnY = st.sidebar.selectbox("Y (Choose a column). Try Selecting Change", df.columns)
-    # hueopt = st.sidebar.selectbox("Hue (Choose a column). Try Selecting Industry", df.columns)
-    #     fig = plt.figure(figsize=(15, 8))
-    # sns.barplot(data=df, x="Year", y="Change", hue="Industry")
-    #     sns.barplot(x=columnX, y=columnY, hue=hueopt, data=df, palette="Paired")
-    #     st.pyplot(fig)
-
-    # Employment By Age and Education
-    # df_age_edu = pd.read_csv("Datasets/employed_15_sex_edu_age_yr.csv").rename(columns={"year": "Year",
-    #                                                                                     "sex": "Sex",
-    #                                                                                     "age": "Age",
-    #                                                                                     "edu_1": "Education",
-    #                                                                                     "employed": "Employed"
-    #                                                                                     }).replace("-", 0)
     df.employed = pd.to_numeric(df.employed)
     df = df[(df.year >= 2017) & (df.age != "15-19")]
     df = df.groupby(["year", "edu_1"]).sum()
