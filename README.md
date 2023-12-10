@@ -1,5 +1,7 @@
 COVID-19 Impact Analysis Project
+
 https://jurgen-covid19.streamlit.app/
+
 Overview
 
 This project aims to analyze the impact of COVID-19 on various socio-economic factors spanning from 2017 to 2021. The dataset includes information on employment, population, income, recruitment, resignation, and inflation. The primary objective is to derive insights into how the pandemic has influenced these crucial indicators over the specified time frame.
